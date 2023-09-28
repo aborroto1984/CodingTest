@@ -31,7 +31,7 @@ def create_product(productName, productSku, productTypeName):
         }
 
         auth_url = "https://smartline-trial.api.sellercloud.us/rest/api/token"
-        products_url = "https://smartlinetrial.api.sellercloud.us/rest/api/Products"
+        products_url = "https://smartline-trial.api.sellercloud.us/rest/api/Products"
         payload = {
             "CompanyId": 163,
             "ProductName": productName,
@@ -73,6 +73,7 @@ def create_product(productName, productSku, productTypeName):
             if responseNext.status_code == 200:
                 print("Product created!!")
 
+                print('Adding product to database')
                 product = Product(name=productName, sku=productSku, typeName=productTypeName)
                 db.session.add(product)
                 db.session.commit()
